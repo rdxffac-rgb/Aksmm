@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AkSmm | Airtel Premium Offers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            /* Professional Blue Glass Theme Background Gradient */
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #020617 100%); 
+            color: #f1f5f9; 
+            min-height: 100vh;
+        }
+        
+        /* 3D Blue Glassmorphism Card Style */
+        .recharge-card { 
+            background: rgba(255, 255, 255, 0.06); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 35px; 
+            padding: 24px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1); 
+            transition: all 0.3s ease;
+        }
+        
+        .recharge-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 12px 40px 0 rgba(239, 68, 68, 0.15);
+        }
+
+        .btn-3d { 
+            background: linear-gradient(180deg, #f43f5e 0%, #e11d48 100%); color: white; 
+            padding: 12px 20px; border-radius: 18px; font-weight: 800; 
+            box-shadow: 0 5px 0px #9f1239, 0 8px 15px rgba(225, 29, 72, 0.3); 
+            transition: all 0.1s ease; display: flex; align-items: center; justify-content: center; min-width: 130px; 
+            border: none; outline: none; cursor: pointer;
+        }
+        .btn-3d:active { transform: translateY(3px); box-shadow: 0 2px 0px #9f1239; }
+
+        .loader { 
+            border: 3px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 3px solid #fff; 
+            width: 18px; height: 18px; animation: spin 1s linear infinite; display: none; margin-right: 8px; 
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .info-btn {
+            width: 30px; height: 30px; border-radius: 50%; background: rgba(254, 226, 226, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            color: #f43f5e; cursor: pointer; border: 1px solid rgba(254, 205, 211, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Input Group with Blue Glass Styling */
+        .input-group { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 2px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 20px; 
+            display: flex; 
+            align-items: center; 
+            padding: 10px 15px; 
+            transition: 0.3s; 
+        }
+        .input-group:focus-within {
+            border-color: rgba(239, 68, 68, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .error-shake { 
+            border-color: #ef4444 !important; 
+            background: rgba(239, 68, 68, 0.15) !important; 
+            animation: shake 0.2s ease-in-out 2; 
+        }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+
+        /* Modal Match with Theme */
+        #infoModal {
+            display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8);
+            z-index: 200; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-content {
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px; max-width: 400px; width: 100%;
+            padding: 30px; max-height: 80vh; overflow-y: auto; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .plan-tag { font-size: 11px; font-weight: 700; color: #cbd5e1; background: rgba(255, 255, 255, 0.1); padding: 4px 10px; border-radius: 10px; display: inline-block; margin-top: 5px; }
+    </style>
+</head>
+<body class="pb-10">
+
+    <!-- Top Sticky Nav - Glassmorphism -->
+    <nav class="flex items-center justify-between px-6 py-5 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50 shadow-lg border-b border-white/5">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg shadow-red-600/20"><span class="text-white font-black text-xl">A</span></div>
+            <span class="text-2xl font-extrabold text-white">AkSmm <span class="text-red-500">Airtel</span></span>
+        </div>
+    </nav>
+
+    <!-- Number Input Section -->
+    <div class="px-5 mt-6" id="numberInputSection">
+        <div class="background: rgba(255, 255, 255, 0.06) recharge-card">
+            <label class="block text-sm font-bold text-slate-300 mb-3">Enter Airtel Mobile Number</label>
+            <div class="input-group" id="inputBox">
+                <img src="https://flagcdn.com/w20/in.png" class="mr-2">
+                <span class="font-bold text-slate-300 mr-2">+91</span>
+                <input type="tel" id="mobileNumber" maxlength="10" placeholder="00000 00000" class="w-full bg-transparent outline-none font-bold text-white tracking-widest placeholder-slate-500">
+            </div>
+            <button onclick="confirmNumber(this)" class="w-full mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl shadow-lg shadow-red-600/20 active:scale-95 transition-all">
+                <div class="loader" id="confirmLoader"></div>
+                <span id="confirmText">Confirm Number</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Offers List -->
+    <div class="px-5 mt-8">
+        <h2 class="text-2xl font-extrabold text-white mb-6">Airtel Special Offers</h2>
+        <div class="space-y-6">
+            
+            <!-- Plan 1 -->
+            <div class="recharge-card border-l-8 border-red-600">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center space-x-2"><span class="text-sm line-through text-slate-500">₹379</span><span class="text-2xl font-black text-red-500">₹169</span></div>
+                        <p class="text-sm font-bold text-slate-300">Validity: 28 Days</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="plan-tag">Unlimited Calls</span>
+                            <span class="plan-tag">100 SMS/Day</span>
+                            <span class="plan-tag">1.5GB/Day + 5G</span>
+                        </div>
+                    </div>
+                    <div onclick="openInfo()" class="info-btn"><i class="fa-solid fa-info text-xs"></i></div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button onclick="startRecharge(this, 'Airtel Plan ₹169', 169, 'Unlimited Local/STD Calls, 100 SMS per day, 1.5GB Data per day + True 5G Access, 28 Days Validity')" class="btn-3d"><div class="loader"></div><span>Recharge</span></button>
+                </div>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="recharge-card border-l-8 border-red-500">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center space-x-2"><span class="text-sm line-through text-slate-500">₹1199</span><span class="text-2xl font-black text-red-500">₹419</span></div>
+                        <p class="text-sm font-bold text-slate-300">Validity: 84 Days</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="plan-tag">Unlimited Calls</span>
+                            <span class="plan-tag">100 SMS/Day</span>
+                            <span class="plan-tag">2GB/Day + True 5G</span>
+                        </div>
+                    </div>
+                    <div onclick="openInfo()" class="info-btn"><i class="fa-solid fa-info text-xs"></i></div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button onclick="startRecharge(this, 'Airtel Plan ₹419', 419, 'Unlimited Local/STD Calls, 100 SMS per day, 2GB Data per day + True 5G Access, 84 Days Validity')" class="btn-3d"><div class="loader"></div><span>Recharge</span></button>
+                </div>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="recharge-card border-l-8 border-red-400">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="flex items-center space-x-2"><span class="text-sm line-through text-slate-500">₹3999</span><span class="text-2xl font-black text-red-500">₹1899</span></div>
+                        <p class="text-sm font-bold text-slate-300">Validity: 365 Days</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="plan-tag">Unlimited Calls</span>
+                            <span class="plan-tag">100 SMS/Day</span>
+                            <span class="plan-tag">2.5GB/Day + Annual 5G</span>
+                        </div>
+                    </div>
+                    <div onclick="openInfo()" class="info-btn"><i class="fa-solid fa-info text-xs"></i></div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button onclick="startRecharge(this, 'Airtel Plan ₹1899', 1899, 'Unlimited Local/STD Calls, 100 SMS per day, 2.5GB Data per day + Annual 5G Access, 365 Days Validity')" class="btn-3d"><div class="loader"></div><span>Recharge</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal details -->
+    <div id="infoModal">
+        <div class="modal-content">
+            <button onclick="closeInfo()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-circle-xmark"></i></button>
+            <h3 class="text-xl font-black text-white mb-4">Airtel Plan Details</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">Special benefits: Unlimited Voice + 5G Data access + Airtel Thanks Rewards for active subscribers.</p>
+        </div>
+    </div>
+
+    <script>
+        let isConfirmed = false; 
+
+        function confirmNumber(btn) {
+            const num = document.getElementById('mobileNumber').value;
+            const loader = document.getElementById('confirmLoader');
+            const text = document.getElementById('confirmText');
+            const box = document.getElementById('inputBox');
+
+            if(num.length === 10) {
+                box.classList.remove('error-shake');
+                loader.style.display = 'inline-block';
+                text.innerText = 'Verifying...';
+                setTimeout(() => {
+                    const fullNum = "+91 " + num;
+                    localStorage.setItem('airtelTarget', fullNum);
+                    isConfirmed = true; 
+                    document.getElementById('numberInputSection').style.display = 'none';
+                }, 2000);
+            } else {
+                triggerError();
+            }
+        }
+
+        function triggerError() {
+            const box = document.getElementById('inputBox');
+            box.classList.remove('error-shake');
+            void box.offsetWidth; 
+            box.classList.add('error-shake');
+            document.getElementById('numberInputSection').scrollIntoView({behavior: 'smooth'});
+        }
+
+        function startRecharge(btn, plan, price, benefits) {
+            if(!isConfirmed) {
+                triggerError();
+                return false; 
+            }
+            
+            const loader = btn.querySelector('.loader');
+            const span = btn.querySelector('span');
+            loader.style.display = 'inline-block';
+            span.innerText = 'Processing...';
+
+            localStorage.setItem('selectedPlan', plan);
+            localStorage.setItem('selectedPrice', price);
+            localStorage.setItem('planBenefits', benefits); 
+            localStorage.setItem('finalTarget', localStorage.getItem('airtelTarget')); 
+
+            setTimeout(() => { window.location.href = "payment.html"; }, 2000);
+        }
+
+        function openInfo() { document.getElementById('infoModal').style.display = 'flex'; }
+        function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
+        window.onclick = function(e) { if(e.target == document.getElementById('infoModal')) closeInfo(); }
+
+        window.onload = () => { localStorage.removeItem('airtelTarget'); };
+    </script>
+</body>
+  </html>
