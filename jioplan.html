@@ -98,7 +98,6 @@
 </head>
 <body class="pb-10">
 
-    <!-- Top Sticky Nav - Glassmorphism -->
     <nav class="flex items-center justify-between px-6 py-5 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50 shadow-lg border-b border-white/5">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-600/20"><span class="text-white font-black text-xl">A</span></div>
@@ -106,7 +105,6 @@
         </div>
     </nav>
 
-    <!-- Number Input Section -->
     <div class="px-5 mt-6" id="numberInputSection">
         <div class="recharge-card">
             <label class="block text-sm font-bold text-slate-300 mb-3">Enter Jio Mobile Number</label>
@@ -122,12 +120,10 @@
         </div>
     </div>
 
-    <!-- Offers List -->
     <div class="px-5 mt-8">
         <h2 class="text-2xl font-extrabold text-white mb-6">Jio Exclusive Offers</h2>
         <div class="space-y-6">
 
-            <!-- Plan 1 -->
             <div class="recharge-card border-l-8 border-indigo-600">
                 <div class="flex justify-between items-start">
                     <div>
@@ -149,7 +145,6 @@
                 </div>
             </div>
 
-            <!-- Plan 2 -->
             <div class="recharge-card border-l-8 border-emerald-500 bg-emerald-500/5">
                 <div class="flex justify-between items-start">
                     <div>
@@ -171,7 +166,6 @@
                 </div>
             </div>
 
-            <!-- Plan 3 -->
             <div class="recharge-card border-l-8 border-orange-500 bg-orange-500/5">
                 <div class="flex justify-between items-start">
                     <div>
@@ -195,7 +189,6 @@
         </div>
     </div>
 
-    <!-- Modal Details -->
     <div id="infoModal">
         <div class="modal-content">
             <button onclick="closeInfo()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-circle-xmark"></i></button>
@@ -259,7 +252,7 @@
         }
 
         function openInfo() { document.getElementById('infoModal').style.display = 'flex'; }
-        function closeInfo() { document.getElementById('infoModal').style.none'; document.getElementById('infoModal').style.display = 'none'; }
+        function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
         
         window.onload = () => { 
             localStorage.removeItem('jioTarget');
