@@ -205,16 +205,6 @@
 <div class="rating-container">
     <h2>Customer Feedback</h2>
 
-    <div class="video-guide-header">
-        <i class="fa-solid fa-circle-play"></i> Watch Tutorial
-    </div>
-
-    <div class="video-guide-section">
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/CgOeFyroHgU" allowfullscreen></iframe>
-        </div>
-    </div>
-
     <div class="overall-rating-badge">
         Overall Rating: 4.8 <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
     </div>
@@ -339,69 +329,4 @@
         }
 
         let starsHTML = '';
-        for (let i = 1; i <= 5; i++) {
-            starsHTML += i <= stars ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star" style="color:rgba(255,255,255,0.15)"></i>';
-        }
-
-        const likes = Math.floor(Math.random() * 1200) + 50;
-
-        return { name, time, text, starsHTML, replyHTML, likes };
-    }
-
-    function injectReviews(n) {
-        const f = document.getElementById('reviews-feed');
-        for(let i=0; i<n; i++) {
-            const r = generateReview();
-            const div = document.createElement('div');
-            div.className = 'review-card';
-            div.innerHTML = `
-                <div><span class="user-name">${r.name}</span><span class="time-ago">${r.time}</span></div>
-                <div style="color:var(--star-color); font-size:10px; margin:5px 0;">${r.starsHTML}</div>
-                <p class="review-text">${r.text}</p>
-                ${r.replyHTML}
-                <div class="actions">
-                    <span class="action-btn" onclick="this.classList.add('liked');">
-                        <i class="fa-solid fa-thumbs-up"></i> <span>${r.likes}</span>
-                    </span>
-                </div>
-            `;
-            f.appendChild(div);
-        }
-    }
-
-    // Star Selector UI
-    const starsUI = document.querySelectorAll('.star-input i');
-    starsUI.forEach(s => {
-        s.addEventListener('click', () => {
-            const v = s.getAttribute('data-val');
-            starsUI.forEach((st, i) => st.classList.toggle('active', i < v));
-            document.getElementById('feedback-box').style.display = 'block';
-        });
-    });
-
-    function handleUserRating() {
-        const n = document.getElementById('inp-name').value;
-        if(!n) return alert("Please enter your name!");
-        document.getElementById('feedback-box').style.display = 'none';
-        document.getElementById('main-loader').style.display = 'block';
-        setTimeout(() => {
-            document.getElementById('main-loader').innerHTML = `<h3 style="color:#60a5fa">✅ Thank you for your feedback, ${n}!</h3>`;
-            setTimeout(() => location.reload(), 2000);
-        }, 2000);
-    }
-
-    function loadMoreReviews() {
-        document.getElementById('btn-load-more').style.display = 'none';
-        document.getElementById('more-loader').style.display = 'block';
-        setTimeout(() => {
-            document.getElementById('more-loader').style.display = 'none';
-            document.getElementById('btn-load-more').style.display = 'inline-block';
-            injectReviews(5);
-        }, 1000);
-    }
-
-    window.onload = () => injectReviews(10);
-</script>
-
-</body>
-</html>
+        for
