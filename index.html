@@ -23,7 +23,7 @@
             --neon-cyan: #00f3ff;
             --neon-purple: #bc13fe;
             --dark-bg: #050811;
-            --card-bg: rgba(13, 19, 38, 0.78);
+            --card-bg: rgba(13, 19, 38, 0.82);
         }
 
         body {
@@ -105,21 +105,24 @@
             text-align: center;
         }
 
-        /* Gaming HUD Service Card */
+        /* Gaming HUD Collage Card (2-Column Grid Optimized) */
         .gaming-card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 18px 20px;
+            border-radius: 18px;
+            padding: 18px 14px 15px 14px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            text-align: center;
             position: relative;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.65);
+            height: 100%;
         }
 
         /* Top-right Cyber Cut Accent */
@@ -128,39 +131,39 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(225deg, rgba(0, 243, 255, 0.25) 50%, transparent 50%);
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(225deg, rgba(0, 243, 255, 0.28) 50%, transparent 50%);
             pointer-events: none;
         }
 
         .gaming-card:hover {
-            transform: translateY(-3px) scale(1.01);
-            border-color: rgba(0, 243, 255, 0.5);
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.18);
+            transform: translateY(-4px);
+            border-color: rgba(0, 243, 255, 0.55);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.22);
         }
 
-        /* Brand Neon Accents */
-        .jio-border { border-left: 4px solid #0066ff; box-shadow: inset 6px 0 15px -10px #0066ff; }
-        .airtel-border { border-left: 4px solid #ff1e1e; box-shadow: inset 6px 0 15px -10px #ff1e1e; }
-        .insta-border { border-left: 4px solid #ff007f; box-shadow: inset 6px 0 15px -10px #ff007f; }
-        .yt-border { border-left: 4px solid #ff0000; box-shadow: inset 6px 0 15px -10px #ff0000; }
-        .amazon-border { border-left: 4px solid #00d2ff; box-shadow: inset 6px 0 15px -10px #00d2ff; }
-        .ff-border { border-left: 4px solid #ff7b00; box-shadow: inset 6px 0 15px -10px #ff7b00; } 
-        .redeem-border { border-left: 4px solid #00ff88; box-shadow: inset 6px 0 15px -10px #00ff88; } 
+        /* Brand Neon Top Accents for Collage Cards */
+        .jio-border { border-top: 3px solid #0066ff; box-shadow: inset 0 8px 18px -12px #0066ff; }
+        .airtel-border { border-top: 3px solid #ff1e1e; box-shadow: inset 0 8px 18px -12px #ff1e1e; }
+        .insta-border { border-top: 3px solid #ff007f; box-shadow: inset 0 8px 18px -12px #ff007f; }
+        .yt-border { border-top: 3px solid #ff0000; box-shadow: inset 0 8px 18px -12px #ff0000; }
+        .amazon-border { border-top: 3px solid #00d2ff; box-shadow: inset 0 8px 18px -12px #00d2ff; }
+        .ff-border { border-top: 3px solid #ff7b00; box-shadow: inset 0 8px 18px -12px #ff7b00; } 
+        .redeem-border { border-top: 3px solid #00ff88; box-shadow: inset 0 8px 18px -12px #00ff88; } 
 
         /* Cyber Gaming Action Button */
         .premium-3d-button {
             background: linear-gradient(135deg, #00f3ff 0%, #0066ff 100%);
             color: #030712;
-            padding: 10px 22px;
+            padding: 9px 16px;
             border-radius: 10px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 800;
             letter-spacing: 0.8px;
             text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            box-shadow: 0 0 14px rgba(0, 243, 255, 0.35);
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.4);
             outline: none;
@@ -168,13 +171,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 105px;
+            width: 100%;
+            min-height: 36px;
             position: relative;
             overflow: hidden;
         }
 
         .premium-3d-button:hover {
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.75);
+            box-shadow: 0 0 22px rgba(0, 243, 255, 0.75);
             filter: brightness(1.1);
         }
 
@@ -192,8 +196,8 @@
 
         /* --- LOADING SPINNER STYLE --- */
         .btn-loader {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border: 2.5px solid #030712;
             border-bottom-color: transparent;
             border-radius: 50%;
@@ -206,16 +210,16 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Hexagon / Angled Icon Box */
+        /* Centered Icon Box for Collage Grid */
         .icon-container {
             width: 52px; 
             height: 52px;
-            border-radius: 14px;
+            border-radius: 15px;
             display: flex; 
             align-items: center; 
             justify-content: center;
-            margin-right: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.45);
             border: 1px solid rgba(255, 255, 255, 0.15);
             flex-shrink: 0;
         }
@@ -348,8 +352,8 @@
             </div>
         </div>
 
-        <!-- Services Section -->
-        <div class="px-5 mt-9 space-y-4">
+        <!-- Services Section (2-Column Collage Grid) -->
+        <div class="px-5 mt-9">
             <div class="flex items-center justify-between mb-5 border-b border-white/10 pb-3">
                 <div class="flex items-center space-x-2.5">
                     <span class="w-1.5 h-6 bg-cyan-400 rounded-full shadow-[0_0_10px_#00f3ff]"></span>
@@ -358,115 +362,106 @@
                 <span class="text-xs font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-md">7 ACTIVE</span>
             </div>
 
-            <!-- Jio -->
-            <div class="gaming-card jio-border">
-                <div class="flex items-center">
-                    <div class="icon-container bg-[#005AFF] italic text-white font-black text-xl">Jio</div>
-                    <div>
-                        <h3 class="font-gaming font-bold text-white text-base tracking-wide">Jio</h3>
-                        <p class="text-xs text-slate-400 font-semibold">Recharge Unlimited 5G</p>
+            <div class="grid grid-cols-2 gap-3.5">
+                
+                <!-- Row 1, Item 1: Jio -->
+                <div class="gaming-card jio-border">
+                    <div class="flex flex-col items-center mb-3.5">
+                        <div class="icon-container bg-[#005AFF] italic text-white font-black text-xl">Jio</div>
+                        <h3 class="font-gaming font-bold text-white text-sm tracking-wide">Jio</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5 leading-tight">Recharge Unlimited 5G</p>
                     </div>
+                    <button onclick="handleRedirect(this, 'jioplan.html')" class="premium-3d-button">
+                        <span class="btn-text">Plans</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
-                <button onclick="handleRedirect(this, 'jioplan.html')" class="premium-3d-button">
-                    <span class="btn-text">Plans</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
 
-            <!-- Airtel -->
-            <div class="gaming-card airtel-border">
-                <div class="flex items-center">
-                    <div class="icon-container bg-[#E40000] text-white"><i class="fa-solid fa-tower-cell text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-gaming font-bold text-white text-base tracking-wide">Airtel</h3>
-                        <p class="text-xs text-slate-400 font-semibold">Recharge Unlimited 5G & 4G</p>
+                <!-- Row 1, Item 2: Airtel -->
+                <div class="gaming-card airtel-border">
+                    <div class="flex flex-col items-center mb-3.5">
+                        <div class="icon-container bg-[#E40000] text-white"><i class="fa-solid fa-tower-cell text-2xl"></i></div>
+                        <h3 class="font-gaming font-bold text-white text-sm tracking-wide">Airtel</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5 leading-tight">Recharge Unlimited 5G & 4G</p>
                     </div>
+                    <button onclick="handleRedirect(this, 'airtelplan.html')" class="premium-3d-button">
+                        <span class="btn-text">Plans</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
-                <button onclick="handleRedirect(this, 'airtelplan.html')" class="premium-3d-button">
-                    <span class="btn-text">Plans</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
 
-            <!-- Instagram -->
-            <div class="gaming-card insta-border">
-                <div class="flex items-center">
-                    <div class="icon-container bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white"><i class="fa-brands fa-instagram text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-gaming font-bold text-white text-base tracking-wide">Instagram</h3>
-                        <p class="text-xs text-slate-400 font-semibold">Followers & Likes</p>
+                <!-- Row 2, Item 3: Instagram -->
+                <div class="gaming-card insta-border">
+                    <div class="flex flex-col items-center mb-3.5">
+                        <div class="icon-container bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white"><i class="fa-brands fa-instagram text-2xl"></i></div>
+                        <h3 class="font-gaming font-bold text-white text-sm tracking-wide">Instagram</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5 leading-tight">Followers & Likes</p>
                     </div>
+                    <button onclick="handleRedirect(this, 'instagramplan.html')" class="premium-3d-button">
+                        <span class="btn-text">Plans</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
-                <button onclick="handleRedirect(this, 'instagramplan.html')" class="premium-3d-button">
-                    <span class="btn-text">Plans</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
 
-            <!-- YouTube -->
-            <div class="gaming-card yt-border">
-                <div class="flex items-center">
-                    <div class="icon-container bg-red-600 text-white"><i class="fa-brands fa-youtube text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-gaming font-bold text-white text-base tracking-wide">YouTube</h3>
-                        <p class="text-xs text-slate-400 font-semibold">Watch-time & Subs</p>
+                <!-- Row 2, Item 4: YouTube -->
+                <div class="gaming-card yt-border">
+                    <div class="flex flex-col items-center mb-3.5">
+                        <div class="icon-container bg-red-600 text-white"><i class="fa-brands fa-youtube text-2xl"></i></div>
+                        <h3 class="font-gaming font-bold text-white text-sm tracking-wide">YouTube</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5 leading-tight">Watch-time & Subs</p>
                     </div>
+                    <button onclick="handleRedirect(this, 'youtubeplan.html')" class="premium-3d-button">
+                        <span class="btn-text">Plans</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
-                <button onclick="handleRedirect(this, 'youtubeplan.html')" class="premium-3d-button">
-                    <span class="btn-text">Plans</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
 
-            <!-- Amazon Prime -->
-            <div class="gaming-card amazon-border">
-                <div class="flex items-center">
-                    <div class="icon-container bg-slate-900 border border-sky-400/40 text-sky-400"><i class="fa-brands fa-amazon text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-gaming font-bold text-white text-base tracking-wide">Amazon Prime</h3>
-                        <p class="text-xs text-slate-400 font-semibold">Monthly Membership</p>
+                <!-- Row 3, Item 5: Amazon Prime -->
+                <div class="gaming-card amazon-border">
+                    <div class="flex flex-col items-center mb-3.5">
+                        <div class="icon-container bg-slate-900 border border-sky-400/40 text-sky-400"><i class="fa-brands fa-amazon text-2xl"></i></div>
+                        <h3 class="font-gaming font-bold text-white text-sm tracking-wide">Amazon Prime</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5 leading-tight">Monthly Membership</p>
                     </div>
+                    <button onclick="handleRedirect(this, 'amazonprime.html')" class="premium-3d-button">
+                        <span class="btn-text">Plans</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
-                <button onclick="handleRedirect(this, 'amazonprime.html')" class="premium-3d-button">
-                    <span class="btn-text">Plans</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
 
-            <!-- Free Fire Top-Up -->
-            <div class="gaming-card ff-border">
-                <div class="flex items-center">
-                    <div class="icon-container bg-gradient-to-br from-orange-500 to-red-600 text-white">
-                        <i class="fa-solid fa-gamepad text-2xl"></i>
+                <!-- Row 3, Item 6: Free Fire Top-Up -->
+                <div class="gaming-card ff-border">
+                    <div class="flex flex-col items-center mb-3.5">
+                        <div class="icon-container bg-gradient-to-br from-orange-500 to-red-600 text-white">
+                            <i class="fa-solid fa-gamepad text-2xl"></i>
+                        </div>
+                        <h3 class="font-gaming font-bold text-white text-sm tracking-wide">Free Fire Top-Up</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5 leading-tight">Diamonds & Event Packs</p>
                     </div>
-                    <div>
-                        <h3 class="font-gaming font-bold text-white text-base tracking-wide">Free Fire Top-Up</h3>
-                        <p class="text-xs text-slate-400 font-semibold">Diamonds & Event Packs</p>
-                    </div>
+                    <button onclick="handleRedirect(this, 'freefire.html')" class="premium-3d-button">
+                        <span class="btn-text">Plans</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
-                <button onclick="handleRedirect(this, 'freefire.html')" class="premium-3d-button">
-                    <span class="btn-text">Plans</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
 
-            <!-- Play Store -->
-            <div class="gaming-card redeem-border">
-                <div class="flex items-center">
-                    <div class="icon-container bg-slate-900 border border-emerald-400/40 flex items-center justify-center">
-                        <i class="fa-brands fa-google-play text-2xl text-emerald-400"></i>
+                <!-- Row 4, Item 7: Play Store (Full Width Bottom Tile for Balanced Collage) -->
+                <div class="gaming-card redeem-border col-span-2 !flex-row !text-left !px-5 !py-4">
+                    <div class="flex items-center">
+                        <div class="icon-container !mb-0 !mr-4 bg-slate-900 border border-emerald-400/40 flex items-center justify-center">
+                            <i class="fa-brands fa-google-play text-2xl text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-gaming font-bold text-white text-base tracking-wide">Play Store</h3>
+                            <p class="text-xs text-slate-400 font-semibold">Redeem Codes & Credits</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="font-gaming font-bold text-white text-base tracking-wide">Play Store</h3>
-                        <p class="text-xs text-slate-400 font-semibold">Redeem Codes & Credits</p>
-                    </div>
+                    <button onclick="handleRedirect(this, 'redeemcode.html')" class="premium-3d-button !w-auto min-w-[105px]">
+                        <span class="btn-text">Plans</span>
+                        <span class="btn-loader"></span>
+                    </button>
                 </div>
-                <button onclick="handleRedirect(this, 'redeemcode.html')" class="premium-3d-button">
-                    <span class="btn-text">Plans</span>
-                    <span class="btn-loader"></span>
-                </button>
-            </div>
 
+            </div>
         </div>
     </div>
 
