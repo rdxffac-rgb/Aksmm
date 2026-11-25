@@ -5,208 +5,441 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Fire Diamonds | AkSmm Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap');
         
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-orange: #ff7b00;
+            --neon-gold: #fbbf24;
+            --dark-bg: #050811;
+            --card-bg: rgba(13, 19, 38, 0.84);
+        }
+
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            /* Professional Blue Glass Theme Background Gradient */
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #020617 100%); 
-            color: #f1f5f9; 
+            font-family: 'Rajdhani', sans-serif; 
+            background-color: var(--dark-bg);
+            color: #e2e8f0; 
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
-        
-        /* Premium 3D Blue Glass Card Style */
-        .premium-3d-card { 
-            position: relative; 
-            background: rgba(255, 255, 255, 0.06); 
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px; 
-            padding: 20px; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); 
-            border-left: 6px solid #F97316; 
-            margin-bottom: 20px; 
-            transition: 0.3s; 
+
+        .font-gaming {
+            font-family: 'Orbitron', sans-serif;
         }
-        
-        .premium-3d-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(249, 115, 22, 0.15);
+
+        /* Live Animated Cyber Grid Overlay */
+        .cyber-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(188, 19, 254, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
         }
-        
-        /* Input with Blue Glass Style */
+
+        /* Live Canvas Background */
+        #liveBgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Gaming HUD Box (UID Verification) */
+        .gaming-hud-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 123, 0, 0.35);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(255, 123, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gaming-hud-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(225deg, rgba(255, 123, 0, 0.35) 50%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* 2-Column Diamond Collage Card */
+        .diamond-collage-card {
+            position: relative;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 18px;
+            padding: 16px 12px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.65);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 100%;
+        }
+
+        .diamond-collage-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 243, 255, 0.5);
+            box-shadow: 0 0 22px rgba(0, 243, 255, 0.2);
+        }
+
+        /* Diamond Image Glow */
+        .diamond-img-wrap {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .diamond-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.55));
+            transition: transform 0.3s ease;
+        }
+
+        .diamond-collage-card:hover .diamond-img-wrap img {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        /* 16:9 VIP Monthly Membership Card with Live Golden Effect */
+        .vip-membership-card {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border-radius: 22px;
+            padding: 20px;
+            background: radial-gradient(circle at 80% 30%, rgba(251, 191, 36, 0.28) 0%, rgba(180, 83, 9, 0.22) 45%, rgba(10, 14, 28, 0.94) 100%);
+            border: 2px solid rgba(251, 191, 36, 0.65);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.25), inset 0 0 25px rgba(251, 191, 36, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .vip-membership-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(251, 191, 36, 0.4), inset 0 0 30px rgba(251, 191, 36, 0.25);
+        }
+
+        /* Live Animated Sweep Shine on VIP Card */
+        .vip-membership-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 45%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(251, 191, 36, 0.18), transparent);
+            transform: rotate(25deg);
+            animation: vipShine 3.8s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes vipShine {
+            0% { left: -60%; }
+            100% { left: 140%; }
+        }
+
+        /* Live Floating Yellow VIP Cart Emblem */
+        .vip-cart-emblem {
+            position: relative;
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 55%, #b45309 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.75), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+            border: 2px solid #fef08a;
+            animation: floatCart 2.6s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes floatCart {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-5px) scale(1.04); }
+        }
+
+        /* Cyber Input Style */
         .input-3d { 
-            background: rgba(255, 255, 255, 0.05); 
-            border-radius: 20px; 
-            border: 2px solid rgba(255, 255, 255, 0.1); 
-            color: white;
+            background: rgba(5, 8, 17, 0.75); 
+            border-radius: 14px; 
+            border: 1.5px solid rgba(0, 243, 255, 0.3); 
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
             transition: all 0.3s ease; 
         }
         .input-3d:focus { 
-            border-color: #F97316; 
-            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2); 
+            border-color: #ff7b00; 
+            box-shadow: 0 0 18px rgba(255, 123, 0, 0.3); 
             outline: none; 
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(13, 19, 38, 0.95);
         }
         
         /* Error Animation */
-        .error-shake { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.15) !important; animation: shake 0.2s ease-in-out 2; }
+        .error-shake { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.18) !important; animation: shake 0.2s ease-in-out 2; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
         
-        /* Premium 3D Orange Button */
+        /* Cyber Gaming Button */
         .btn-3d { 
-            background: linear-gradient(180deg, #F97316 0%, #EA580C 100%); 
-            color: white; 
-            border-radius: 16px; 
-            font-weight: 700; 
-            box-shadow: 0 4px 0px #9A3412; 
-            transition: all 0.1s ease; 
+            background: linear-gradient(135deg, #ff7b00 0%, #ea580c 100%); 
+            color: #ffffff; 
+            border-radius: 10px; 
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800; 
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.45); 
+            transition: all 0.2s ease; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             outline: none;
             cursor: pointer;
         }
-        .btn-3d:active { transform: translateY(2px); box-shadow: 0 2px 0px #9A3412; }
+        .btn-3d:hover { filter: brightness(1.12); box-shadow: 0 0 22px rgba(249, 115, 22, 0.7); }
+        .btn-3d:active { transform: scale(0.95); }
         
         /* Loader Animation */
         .loader { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 18px; height: 18px; animation: spin 1s linear infinite; display: none; margin-right: 8px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* Trending Blink Badge */
-        .trending-badge { position: absolute; top: -10px; right: 10px; background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 10px; animation: blink 0.8s infinite; box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .trending-badge { 
+            position: absolute; 
+            top: -9px; 
+            right: 10px; 
+            background: linear-gradient(90deg, #ef4444, #dc2626); 
+            color: white; 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 9px; 
+            font-weight: 800; 
+            padding: 3px 8px; 
+            border-radius: 6px; 
+            animation: blink 0.9s infinite; 
+            box-shadow: 0 0 12px rgba(239, 68, 68, 0.7); 
+            border: 1px solid rgba(255,255,255,0.4);
+            z-index: 10;
+        }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.45; } 100% { opacity: 1; } }
 
-        .plan-tag-blue { font-size: 10px; background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 2px 8px; border-radius: 9999px; }
-        .plan-tag-indigo { font-size: 10px; background: rgba(79, 70, 229, 0.3); color: #c7d2fe; padding: 2px 8px; border-radius: 9999px; margin-left: 8px; }
-        .plan-tag-purple { font-size: 10px; background: rgba(147, 51, 234, 0.3); color: #e9d5ff; padding: 2px 8px; border-radius: 9999px; margin-left: 8px; }
+        .plan-tag-blue { font-family: 'Orbitron', sans-serif; font-size: 8px; background: rgba(59, 130, 246, 0.25); border: 1px solid rgba(59, 130, 246, 0.5); color: #93c5fd; padding: 2px 7px; border-radius: 6px; }
+        .plan-tag-indigo { font-family: 'Orbitron', sans-serif; font-size: 8px; background: rgba(99, 102, 241, 0.25); border: 1px solid rgba(99, 102, 241, 0.5); color: #c7d2fe; padding: 2px 7px; border-radius: 6px; }
+        .plan-tag-gold { font-family: 'Orbitron', sans-serif; font-size: 9px; background: rgba(251, 191, 36, 0.25); border: 1px solid rgba(251, 191, 36, 0.6); color: #fde047; padding: 2px 8px; border-radius: 6px; }
     </style>
 </head>
-<body class="pb-10">
+<body class="pb-12">
 
-    <!-- Top Sticky Nav - Glassmorphism -->
-    <nav class="flex items-center justify-between px-6 py-5 sticky top-0 bg-slate-900/60 backdrop-blur-md z-50 border-b border-white/5 shadow-lg">
+    <!-- Live Animated Background Elements -->
+    <div class="cyber-grid"></div>
+    <canvas id="liveBgCanvas"></canvas>
+
+    <!-- Top Sticky HUD Nav -->
+    <nav class="flex items-center justify-between px-5 py-4 sticky top-0 bg-[#050811]/85 backdrop-blur-xl z-50 border-b border-orange-500/25 shadow-[0_4px_20px_rgba(0,0,0,0.65)]">
         <div class="flex items-center space-x-3">
-            <a href="index.html" class="w-10 h-10 bg-white/10 border border-white/10 rounded-xl flex items-center justify-center text-white active:scale-90 transition"><i class="fa-solid fa-arrow-left"></i></a>
-            <span class="text-2xl font-extrabold tracking-tighter text-white">FF <span class="text-[#F97316]">Diamonds</span></span>
+            <a href="index.html" class="w-10 h-10 bg-orange-500/15 hover:bg-orange-500/25 border border-orange-500/40 rounded-xl flex items-center justify-center text-orange-400 active:scale-90 transition shadow-[0_0_12px_rgba(255,123,0,0.2)]">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div>
+                <span class="text-xl font-gaming font-black tracking-wider text-white block leading-none">FF <span class="text-[#ff7b00]">DIAMONDS</span></span>
+                <span class="text-[10px] font-bold tracking-widest text-cyan-400 uppercase">Official UID Top-Up</span>
+            </div>
+        </div>
+        <div class="bg-orange-500/10 border border-orange-500/30 px-2.5 py-1 rounded-lg flex items-center space-x-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-[10px] font-gaming font-bold text-emerald-400">0.001s</span>
         </div>
     </nav>
 
-    <!-- UID Verification Section -->
-    <div class="px-5 mt-6">
-        <div class="premium-3d-card border-none" id="verifyBox">
-            <label class="block text-sm font-bold text-slate-300 mb-3">Enter Free Fire Player UID</label>
-            <input type="number" id="playerUid" placeholder="Ex: 123456789" class="w-full p-4 input-3d placeholder-slate-500 font-bold" oninput="this.classList.remove('error-shake')">
-            <button onclick="verifyUid()" id="verifyBtn" class="w-full mt-4 p-4 btn-3d">
-                <div class="loader" id="confirmLoader"></div><span id="btnText">Verify Player ID</span>
-            </button>
+    <!-- Main Container -->
+    <div class="max-w-xl mx-auto">
+
+        <!-- UID Verification Section -->
+        <div class="px-5 mt-6">
+            <div class="gaming-hud-box" id="verifyBox">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-sm font-gaming font-bold text-cyan-300 tracking-wide uppercase">
+                        <i class="fa-solid fa-crosshairs text-orange-400 mr-1.5"></i> Enter Player UID
+                    </label>
+                    <span class="text-[10px] font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded">8-12 DIGITS</span>
+                </div>
+                <input type="number" id="playerUid" placeholder="Ex: 123456789" class="w-full p-4 input-3d placeholder-slate-600 font-bold text-base" oninput="this.classList.remove('error-shake')">
+                <button onclick="verifyUid()" id="verifyBtn" class="w-full mt-4 p-4 btn-3d text-sm tracking-wider">
+                    <div class="loader" id="confirmLoader"></div><span id="btnText">Verify Player ID</span>
+                </button>
+            </div>
         </div>
-    </div>
 
-    <!-- Diamonds Plans Section -->
-    <div class="px-5 mt-8 hidden" id="plansSection">
-        <h2 class="text-xl font-extrabold text-white mb-6">Select Diamond Pack</h2>
-        <div class="space-y-4">
-
-            <!-- Plan 1 -->
-            <div class="premium-3d-card border-l-6 border-red-500 bg-red-500/5">
-                <div class="trending-badge">TRENDING</div>
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-extrabold text-xl text-red-400">5000 Diamonds</h3>
-                        <p class="text-xs text-slate-400">Delivery: 0.001 Second Instantly</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-black text-red-400">₹1000</span>
-                        <button onclick="buyNow(this, 'FF (5000 Diamonds)', 1000, 'Limited Edition Trending Pack, Instant 5k Credit')" class="block mt-2 px-6 py-2 btn-3d text-sm" style="background: #ef4444; box-shadow: 0 4px 0px #991b1b;"><span>Buy Now</span></button>
-                    </div>
+        <!-- Diamonds Plans Section -->
+        <div class="px-5 mt-8 hidden" id="plansSection">
+            <div class="flex items-center justify-between mb-5 border-b border-white/10 pb-3">
+                <div class="flex items-center space-x-2.5">
+                    <span class="w-1.5 h-6 bg-orange-500 rounded-full shadow-[0_0_10px_#ff7b00]"></span>
+                    <h2 class="text-lg font-gaming font-extrabold text-white tracking-wider uppercase">Select Diamond Pack</h2>
                 </div>
-            </div>
-            
-            <!-- Plan 2 -->
-            <div class="premium-3d-card border-l-6 border-blue-500 bg-blue-500/5">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-extrabold text-lg text-blue-400">200 Diamonds <span class="plan-tag-blue">POPULAR</span></h3>
-                        <p class="text-xs text-slate-400">Delivery: 0.001 Second Instantly</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-black text-blue-400">₹80</span>
-                        <button onclick="buyNow(this, 'FF (200 Diamonds)', 80, 'Best For Event Completion, Instant delivery')" class="block mt-2 px-6 py-2 btn-3d text-sm" style="background: #3B82F6; box-shadow: 0 4px 0px #1E40AF;"><span>Buy</span></button>
-                    </div>
-                </div>
+                <span class="text-[10px] font-gaming font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 px-2.5 py-1 rounded-md">INSTANT</span>
             </div>
 
-            <!-- Plan 3 -->
-            <div class="premium-3d-card">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-extrabold text-lg text-white">300 Diamonds</h3>
-                        <p class="text-xs text-slate-400">Delivery: 0.001 Second Instantly</p>
+            <!-- 2-Column Collage Grid for 6 Diamond Packs -->
+            <div class="grid grid-cols-2 gap-3.5">
+
+                <!-- Plan 1: 5000 Diamonds -->
+                <div class="diamond-collage-card border-t-2 border-red-500 bg-red-950/20">
+                    <div class="trending-badge">TRENDING</div>
+                    <div class="flex flex-col items-center w-full mt-1">
+                        <div class="diamond-img-wrap">
+                            <img src="diamonds.png" alt="5000 Diamonds">
+                        </div>
+                        <h3 class="font-gaming font-extrabold text-sm text-red-400 tracking-wide">5000 Diamonds</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                        <span class="text-2xl font-gaming font-black text-red-400 my-2">₹1000</span>
                     </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-black text-[#F97316]">₹120</span>
-                        <button onclick="buyNow(this, 'FF (300 Diamonds)', 120, 'Official Garena Topup, Instant Delivery')" class="block mt-2 px-6 py-2 btn-3d text-sm"><span>Buy</span></button>
-                    </div>
+                    <button onclick="buyNow(this, 'FF (5000 Diamonds)', 1000, 'Limited Edition Trending Pack, Instant 5k Credit')" class="w-full py-2.5 btn-3d text-xs" style="background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 0 15px rgba(239, 68, 68, 0.45);">
+                        <span>Buy Now</span>
+                    </button>
                 </div>
+                
+                <!-- Plan 2: 200 Diamonds -->
+                <div class="diamond-collage-card border-t-2 border-blue-500 bg-blue-950/20">
+                    <div class="flex flex-col items-center w-full">
+                        <span class="plan-tag-blue mb-1.5">POPULAR</span>
+                        <div class="diamond-img-wrap">
+                            <img src="diamonds.png" alt="200 Diamonds">
+                        </div>
+                        <h3 class="font-gaming font-extrabold text-sm text-blue-400 tracking-wide">200 Diamonds</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                        <span class="text-2xl font-gaming font-black text-blue-400 my-2">₹80</span>
+                    </div>
+                    <button onclick="buyNow(this, 'FF (200 Diamonds)', 80, 'Best For Event Completion, Instant delivery')" class="w-full py-2.5 btn-3d text-xs" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 0 15px rgba(59, 130, 246, 0.45);">
+                        <span>Buy</span>
+                    </button>
+                </div>
+
+                <!-- Plan 3: 300 Diamonds -->
+                <div class="diamond-collage-card border-t-2 border-orange-500">
+                    <div class="flex flex-col items-center w-full">
+                        <div class="diamond-img-wrap mt-2">
+                            <img src="diamonds.png" alt="300 Diamonds">
+                        </div>
+                        <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">300 Diamonds</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                        <span class="text-2xl font-gaming font-black text-[#ff7b00] my-2">₹120</span>
+                    </div>
+                    <button onclick="buyNow(this, 'FF (300 Diamonds)', 120, 'Official Garena Topup, Instant Delivery')" class="w-full py-2.5 btn-3d text-xs">
+                        <span>Buy</span>
+                    </button>
+                </div>
+
+                <!-- Plan 4: 560 Diamonds -->
+                <div class="diamond-collage-card border-t-2 border-indigo-500 bg-indigo-950/20">
+                    <div class="flex flex-col items-center w-full">
+                        <span class="plan-tag-indigo mb-1.5">PROMO</span>
+                        <div class="diamond-img-wrap">
+                            <img src="diamonds.png" alt="560 Diamonds">
+                        </div>
+                        <h3 class="font-gaming font-extrabold text-sm text-indigo-400 tracking-wide">560 Diamonds</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                        <span class="text-2xl font-gaming font-black text-indigo-400 my-2">₹200</span>
+                    </div>
+                    <button onclick="buyNow(this, 'FF (560 Diamonds)', 200, 'Instant Delivery, Best for Elite Pass')" class="w-full py-2.5 btn-3d text-xs" style="background: linear-gradient(135deg, #6366f1, #4338ca); box-shadow: 0 0 15px rgba(99, 102, 241, 0.45);">
+                        <span>Buy</span>
+                    </button>
+                </div>
+
+                <!-- Plan 5: 1050 Diamonds -->
+                <div class="diamond-collage-card border-t-2 border-orange-500">
+                    <div class="flex flex-col items-center w-full">
+                        <div class="diamond-img-wrap mt-2">
+                            <img src="diamonds.png" alt="1050 Diamonds">
+                        </div>
+                        <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">1050 Diamonds</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                        <span class="text-2xl font-gaming font-black text-[#ff7b00] my-2">₹300</span>
+                    </div>
+                    <button onclick="buyNow(this, 'FF (1050 Diamonds)', 300, 'High Value Pack, Instant Credit')" class="w-full py-2.5 btn-3d text-xs">
+                        <span>Buy</span>
+                    </button>
+                </div>
+
+                <!-- Plan 6: 1800 Diamonds -->
+                <div class="diamond-collage-card border-t-2 border-orange-500">
+                    <div class="flex flex-col items-center w-full">
+                        <div class="diamond-img-wrap mt-2">
+                            <img src="diamonds.png" alt="1800 Diamonds">
+                        </div>
+                        <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">1800 Diamonds</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                        <span class="text-2xl font-gaming font-black text-[#ff7b00] my-2">₹500</span>
+                    </div>
+                    <button onclick="buyNow(this, 'FF (1800 Diamonds)', 500, 'Mega Pack, Instant Delivery, Verified')" class="w-full py-2.5 btn-3d text-xs">
+                        <span>Buy</span>
+                    </button>
+                </div>
+
             </div>
 
-            <!-- Plan 4 -->
-            <div class="premium-3d-card border-l-6 border-indigo-600 bg-indigo-500/5">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-extrabold text-lg text-indigo-400">560 Diamonds <span class="plan-tag-indigo">PROMO</span></h3>
-                        <p class="text-xs text-slate-400">Delivery: 0.001 Second Instantly</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-black text-indigo-400">₹200</span>
-                        <button onclick="buyNow(this, 'FF (560 Diamonds)', 200, 'Instant Delivery, Best for Elite Pass')" class="block mt-2 px-6 py-2 btn-3d text-sm" style="background: #4F46E5; box-shadow: 0 4px 0px #312E81;"><span>Buy</span></button>
-                    </div>
-                </div>
-            </div>
+            <!-- Plan 7: Monthly Membership (Large 16:9 Special Yellow/Gold Live Cart Card at Bottom) -->
+            <div class="mt-5">
+                <div class="vip-membership-card">
+                    <!-- Top Header Row inside 16:9 Card -->
+                    <div class="flex items-start justify-between z-10">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="plan-tag-gold"><i class="fa-solid fa-crown mr-1"></i> VIP PASS</span>
+                                <span class="text-[10px] font-bold text-amber-300/90 uppercase tracking-wider">30 Days Special</span>
+                            </div>
+                            <h3 class="font-gaming font-black text-lg sm:text-xl text-yellow-300 tracking-wide drop-shadow-[0_2px_10px_rgba(251,191,36,0.45)]">
+                                Monthly Membership
+                            </h3>
+                            <p class="text-xs text-amber-100/80 font-semibold mt-0.5">Delivery: 0.001 Second Instantly</p>
+                        </div>
 
-            <!-- Plan 5 -->
-            <div class="premium-3d-card">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-extrabold text-lg text-white">1050 Diamonds</h3>
-                        <p class="text-xs text-slate-400">Delivery: 0.001 Second Instantly</p>
+                        <!-- Live Yellow Glowing Free Fire VIP Cart Emblem (Instead of diamonds.png) -->
+                        <div class="vip-cart-emblem">
+                            <i class="fa-solid fa-crown text-amber-950 text-xs absolute -top-2.5 bg-yellow-300 px-1.5 py-0.5 rounded-full border border-amber-700 shadow"></i>
+                            <i class="fa-solid fa-cart-shopping text-slate-950 text-2xl"></i>
+                        </div>
                     </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-black text-[#F97316]">₹300</span>
-                        <button onclick="buyNow(this, 'FF (1050 Diamonds)', 300, 'High Value Pack, Instant Credit')" class="block mt-2 px-6 py-2 btn-3d text-sm"><span>Buy</span></button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Plan 6 -->
-            <div class="premium-3d-card">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-extrabold text-lg text-white">1800 Diamonds</h3>
-                        <p class="text-xs text-slate-400">Delivery: 0.001 Second Instantly</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-black text-[#F97316]">₹500</span>
-                        <button onclick="buyNow(this, 'FF (1800 Diamonds)', 500, 'Mega Pack, Instant Delivery, Verified')" class="block mt-2 px-6 py-2 btn-3d text-sm"><span>Buy</span></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Plan 7 -->
-            <div class="premium-3d-card border-l-6 border-purple-600 bg-purple-500/5">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-extrabold text-lg text-purple-400">Monthly Membership <span class="plan-tag-purple">VIP</span></h3>
-                        <p class="text-xs text-slate-400">Delivery: 0.001 Second Instantly</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-black text-purple-400">₹300</span>
-                        <button onclick="buyNow(this, 'FF Monthly Membership', 300, '30 Days Rewards, Instant VIP Badge, Fast Credit')" class="block mt-2 px-6 py-2 btn-3d text-sm" style="background: #9333EA; box-shadow: 0 4px 0px #581C87;"><span>Buy</span></button>
+                    <!-- Bottom Price & Action Row inside 16:9 Card -->
+                    <div class="flex items-center justify-between pt-3 border-t border-yellow-400/25 z-10">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-amber-200/75 block font-bold">Total Price</span>
+                            <span class="text-3xl font-gaming font-black text-yellow-300 drop-shadow-[0_0_12px_rgba(253,224,71,0.5)]">₹300</span>
+                        </div>
+                        <button onclick="buyNow(this, 'FF Monthly Membership', 300, '30 Days Rewards, Instant VIP Badge, Fast Credit')" class="px-7 py-3 btn-3d text-xs sm:text-sm !text-slate-950" style="background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%); box-shadow: 0 0 20px rgba(251, 191, 36, 0.65); border-color: #fef08a;">
+                            <span>Buy</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -215,6 +448,118 @@
     </div>
 
     <script>
+        /* ==========================================
+           LIVE INTERACTIVE GAMING PARTICLE ENGINE
+           ========================================== */
+        const canvas = document.getElementById('liveBgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 130 };
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        window.addEventListener('touchmove', function(event) {
+            if (event.touches.length > 0) {
+                mouse.x = event.touches[0].clientX;
+                mouse.y = event.touches[0].clientY;
+            }
+        });
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.2 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 1.1;
+                this.speedY = (Math.random() - 0.5) * 1.1;
+                this.color = Math.random() > 0.4 ? '#00f3ff' : '#bc13fe';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= (dx / distance) * force * 2;
+                        this.y -= (dy / distance) * force * 2;
+                    }
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = Math.min((canvas.width * canvas.height) / 14000, 75);
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        let opacity = 1 - (distance / 110);
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${opacity * 0.22})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        /* ==========================================
+           ORIGINAL FUNCTIONALITY & LOGIC (UNCHANGED)
+           ========================================== */
         let isConfirmed = false;
 
         function verifyUid() {
@@ -230,8 +575,8 @@
                 setTimeout(() => {
                     loader.style.display = 'none';
                     btnText.innerText = "Verified: " + uid;
-                    document.getElementById('verifyBtn').style.background = "#059669"; 
-                    document.getElementById('verifyBtn').style.boxShadow = "0 4px 0px #064E3B";
+                    document.getElementById('verifyBtn').style.background = "linear-gradient(135deg, #10b981, #047857)"; 
+                    document.getElementById('verifyBtn').style.boxShadow = "0 0 18px rgba(16, 185, 129, 0.5)";
                     isConfirmed = true;
                     localStorage.setItem('ffUid', uid);
                     
@@ -280,4 +625,4 @@
         });
     </script>
 </body>
-                          </html>
+</html>
