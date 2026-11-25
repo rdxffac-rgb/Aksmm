@@ -5,233 +5,469 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redeem Code | AkSmm Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap');
         
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            /* Professional Blue Glass Theme Background Gradient */
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #020617 100%); 
-            color: #f1f5f9; 
-            min-height: 100vh;
-        }
-        
-        /* Premium 3D Blue Glass Card Style */
-        .premium-3d-card { 
-            background: rgba(255, 255, 255, 0.06); 
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px; 
-            padding: 20px; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); 
-            border-left: 6px solid #34A853; 
-            margin-bottom: 20px; 
-            transition: 0.3s; 
-        }
-        
-        .premium-3d-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(52, 168, 83, 0.15);
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-green: #00ff88;
+            --dark-bg: #050811;
+            --card-bg: rgba(13, 19, 38, 0.84);
         }
 
-        /* Input with Blue Glass Style */
+        body { 
+            font-family: 'Rajdhani', sans-serif; 
+            background-color: var(--dark-bg);
+            color: #e2e8f0; 
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .font-gaming {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Live Animated Cyber Grid Overlay */
+        .cyber-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(188, 19, 254, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Live Canvas Background */
+        #liveBgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Gaming HUD Box (Email Verification & Custom Box) */
+        .gaming-hud-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 255, 136, 0.35);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(0, 255, 136, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gaming-hud-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(225deg, rgba(0, 255, 136, 0.3) 50%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* 2-Column Redeem Collage Card */
+        .redeem-collage-card {
+            position: relative;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 18px;
+            padding: 16px 12px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.65);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 100%;
+        }
+
+        .redeem-collage-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 255, 136, 0.5);
+            box-shadow: 0 0 22px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Redeem Image Glow */
+        .redeem-img-wrap {
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .redeem-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.45));
+            transition: transform 0.3s ease;
+        }
+
+        .redeem-collage-card:hover .redeem-img-wrap img {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        /* Cyber Input Style */
         .input-3d { 
-            background: rgba(255, 255, 255, 0.05); 
-            border-radius: 20px; 
-            border: 2px solid rgba(255, 255, 255, 0.1); 
-            color: white;
+            background: rgba(5, 8, 17, 0.78); 
+            border-radius: 14px; 
+            border: 1.5px solid rgba(0, 255, 136, 0.3); 
+            color: #ffffff;
             transition: all 0.3s ease; 
         }
         .input-3d:focus { 
-            border-color: #34A853; 
-            box-shadow: 0 0 0 4px rgba(52, 168, 83, 0.2); 
+            border-color: #00ff88; 
+            box-shadow: 0 0 18px rgba(0, 255, 136, 0.28); 
             outline: none; 
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(13, 19, 38, 0.95);
         }
         
-        .error-shake { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.15) !important; animation: shake 0.2s ease-in-out 2; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2) !important; }
+        .error-shake { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.18) !important; animation: shake 0.2s ease-in-out 2; box-shadow: 0 0 15px rgba(239, 68, 68, 0.3) !important; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
         
+        /* Cyber Gaming Button */
         .btn-3d { 
-            background: linear-gradient(180deg, #34A853 0%, #2D8E47 100%); 
-            color: white; 
-            border-radius: 16px; 
-            font-weight: 700; 
-            box-shadow: 0 4px 0px #1B5E20; 
-            transition: all 0.1s ease; 
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+            color: #ffffff; 
+            border-radius: 10px; 
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800; 
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); 
+            transition: all 0.2s ease; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             outline: none;
             cursor: pointer;
         }
-        .btn-3d:active { transform: translateY(2px); box-shadow: 0 2px 0px #1B5E20; }
+        .btn-3d:hover { filter: brightness(1.12); box-shadow: 0 0 22px rgba(16, 185, 129, 0.7); }
+        .btn-3d:active { transform: scale(0.95); }
         
         .loader { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 18px; height: 18px; animation: spin 1s linear infinite; display: none; margin-right: 8px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Custom Styles for Trending 3D Live Card in Dark Mode */
-        .trending-premium-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 30px;
-            padding: 24px;
-            box-shadow: 0 20px 40px rgba(219, 39, 119, 0.15), 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-left: 6px solid #db2777;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: visible;
-            transform: translateY(0px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .trending-premium-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 25px 45px rgba(219, 39, 119, 0.2), 0 15px 35px rgba(0, 0, 0, 0.4);
-            border-color: rgba(219, 39, 119, 0.4);
-        }
+        /* Trending Blink Badge */
         .blink-trending {
-            animation: scaleBlink 1.4s infinite ease-in-out;
-            box-shadow: 0 0 12px #db2777;
+            position: absolute;
+            top: -10px;
+            right: 8px;
+            animation: scaleBlink 1.2s infinite ease-in-out;
+            box-shadow: 0 0 14px rgba(236, 72, 153, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 10;
         }
         @keyframes scaleBlink {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.08); opacity: 0.85; }
+            50% { transform: scale(1.07); opacity: 0.8; }
         }
 
-        .plan-tag-orange { font-size: 10px; background: rgba(249, 115, 22, 0.2); color: #ffedd5; padding: 2px 8px; border-radius: 9999px; margin-left: 8px; font-weight: 700; }
-        .plan-tag-purple { font-size: 10px; background: rgba(147, 51, 234, 0.2); color: #f3e8ff; padding: 2px 8px; border-radius: 9999px; margin-left: 8px; font-weight: 700; }
+        .plan-tag-orange { font-family: 'Orbitron', sans-serif; font-size: 8px; background: rgba(249, 115, 22, 0.25); border: 1px solid rgba(249, 115, 22, 0.5); color: #fdba74; padding: 2px 7px; border-radius: 6px; font-weight: 800; }
+        .plan-tag-cyan { font-family: 'Orbitron', sans-serif; font-size: 8px; background: rgba(0, 243, 255, 0.2); border: 1px solid rgba(0, 243, 255, 0.5); color: #67e8f9; padding: 2px 7px; border-radius: 6px; font-weight: 800; }
+        .plan-tag-purple { font-family: 'Orbitron', sans-serif; font-size: 8px; background: rgba(147, 51, 234, 0.25); border: 1px solid rgba(147, 51, 234, 0.5); color: #d8b4fe; padding: 2px 7px; border-radius: 6px; font-weight: 800; }
     </style>
 </head>
-<body class="pb-10">
+<body class="pb-12">
 
-    <!-- Top Sticky Nav - Glassmorphism -->
-    <nav class="flex items-center justify-between px-6 py-5 sticky top-0 bg-slate-900/60 backdrop-blur-md z-50 border-b border-white/5 shadow-lg">
+    <!-- Live Animated Background Elements -->
+    <div class="cyber-grid"></div>
+    <canvas id="liveBgCanvas"></canvas>
+
+    <!-- Top Sticky HUD Nav -->
+    <nav class="flex items-center justify-between px-5 py-4 sticky top-0 bg-[#050811]/85 backdrop-blur-xl z-50 border-b border-emerald-500/25 shadow-[0_4px_20px_rgba(0,0,0,0.65)]">
         <div class="flex items-center space-x-3">
-            <a href="index.html" class="w-10 h-10 bg-white/10 border border-white/10 rounded-xl flex items-center justify-center text-white active:scale-90 transition"><i class="fa-solid fa-arrow-left"></i></a>
-            <span class="text-2xl font-extrabold tracking-tighter text-white">Google <span class="text-[#34A853]">Redeem</span></span>
+            <a href="index.html" class="w-10 h-10 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 rounded-xl flex items-center justify-center text-emerald-400 active:scale-90 transition shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div>
+                <span class="text-xl font-gaming font-black tracking-wider text-white block leading-none">GOOGLE <span class="text-[#00ff88]">REDEEM</span></span>
+                <span class="text-[10px] font-bold tracking-widest text-cyan-400 uppercase">Instant Gmail Code</span>
+            </div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-lg flex items-center space-x-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-[10px] font-gaming font-bold text-emerald-400">0.001s</span>
         </div>
     </nav>
 
-    <!-- Email Verification Section -->
-    <div class="px-5 mt-6">
-        <div class="premium-3d-card border-none" id="verifyBox">
-            <label class="block text-sm font-bold text-slate-300 mb-3">Enter Gmail Address for Delivery</label>
-            <input type="email" id="userEmail" placeholder="example@gmail.com" class="w-full p-4 input-3d placeholder-slate-500 font-bold" oninput="this.classList.remove('error-shake')">
-            <button onclick="verifyEmail()" id="verifyBtn" class="w-full mt-4 p-4 btn-3d">
-                <div class="loader" id="confirmLoader"></div><span id="btnText">Verify Email</span>
-            </button>
-        </div>
-    </div>
+    <!-- Main Container -->
+    <div class="max-w-xl mx-auto">
 
-    <!-- Main Plans Content Wrapper -->
-    <div id="mainSection" class="hidden">
-        
-        <!-- Custom Input Card -->
-        <div class="px-5 mt-4">
-            <div class="premium-3d-card border-l-6 border-blue-500 bg-blue-500/5">
-                <h3 class="font-extrabold text-blue-400 mb-4">Custom Redeem Code</h3>
-                <div class="relative">
-                    <span class="absolute left-4 top-4 font-bold text-slate-400">₹</span>
-                    <input type="number" id="customAmount" placeholder="Enter Amount (80 - 5000)" class="w-full p-4 pl-10 input-3d font-bold placeholder-slate-600" oninput="calculateRedeem()">
+        <!-- Email Verification Section -->
+        <div class="px-5 mt-6">
+            <div class="gaming-hud-box" id="verifyBox">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-sm font-gaming font-bold text-emerald-300 tracking-wide uppercase">
+                        <i class="fa-solid fa-envelope-circle-check text-cyan-400 mr-1.5"></i> Gmail Address
+                    </label>
+                    <span class="text-[10px] font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded">CODE DELIVERY</span>
                 </div>
-                <div class="mt-4 p-4 bg-slate-950/40 rounded-2xl border border-white/5 flex justify-between items-center shadow-sm">
-                    <span class="text-sm font-bold text-slate-400">You will get:</span>
-                    <span class="text-lg font-black text-blue-400" id="redeemResult">Enter Minimum Amount ₹80</span>
-                </div>
-                <button onclick="buyNow(this, 'Custom Redeem Code', 'custom', 'Instant Delivery on Gmail')" class="w-full mt-4 p-3 btn-3d" style="background: #3B82F6; box-shadow: 0 4px 0px #1E40AF;">Buy Custom</button>
+                <input type="email" id="userEmail" placeholder="example@gmail.com" class="w-full p-4 input-3d placeholder-slate-600 font-bold text-base" oninput="this.classList.remove('error-shake')">
+                <button onclick="verifyEmail()" id="verifyBtn" class="w-full mt-4 p-4 btn-3d text-sm tracking-wider">
+                    <div class="loader" id="confirmLoader"></div><span id="btnText">Verify Email</span>
+                </button>
             </div>
         </div>
 
-        <!-- Offers List -->
-        <div class="px-5 mt-8">
-            <h2 class="text-xl font-extrabold text-white mb-6">Best Offers for You</h2>
-            <div class="space-y-4">
-
-                <!-- Plan 1 -->
-                <div class="premium-3d-card">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-extrabold text-lg text-white">₹200 Redeem Code</h3>
-                            <p class="text-xs text-slate-400 mt-1">Delivery: 0.001 Sec Instantly</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-2xl font-black text-[#34A853]">₹89</span>
-                            <button onclick="buyNow(this, 'Redeem Code (₹200)', 89, '₹200 Play Store Credit, Instant Delivery')" class="block mt-2 px-6 py-2 btn-3d text-sm">Buy</button>
-                        </div>
+        <!-- Main Plans Content Wrapper -->
+        <div id="mainSection" class="hidden">
+            
+            <!-- Custom Input Card -->
+            <div class="px-5 mt-5">
+                <div class="gaming-hud-box !border-blue-500/40" style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(59, 130, 246, 0.1);">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-gaming font-extrabold text-sm text-blue-400 tracking-wide uppercase">
+                            <i class="fa-solid fa-sliders mr-1.5"></i> Custom Redeem Code
+                        </h3>
+                        <span class="text-[10px] font-bold text-blue-300 bg-blue-500/15 border border-blue-500/30 px-2 py-0.5 rounded">₹80 - ₹5000</span>
                     </div>
+                    <div class="relative">
+                        <span class="absolute left-4 top-3.5 font-gaming font-bold text-blue-400 text-lg">₹</span>
+                        <input type="number" id="customAmount" placeholder="Enter Amount (80 - 5000)" class="w-full p-3.5 pl-10 input-3d !border-blue-500/40 font-gaming font-bold placeholder-slate-600" oninput="calculateRedeem()">
+                    </div>
+                    <div class="mt-3.5 p-3.5 bg-[#050811]/80 rounded-xl border border-blue-500/20 flex justify-between items-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">You will get:</span>
+                        <span class="text-base font-gaming font-black text-blue-400" id="redeemResult">Enter Minimum Amount ₹80</span>
+                    </div>
+                    <button onclick="buyNow(this, 'Custom Redeem Code', 'custom', 'Instant Delivery on Gmail')" class="w-full mt-3.5 p-3.5 btn-3d text-xs tracking-wider" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);">Buy Custom</button>
+                </div>
+            </div>
+
+            <!-- Offers List (6 Plans in 2-Column Collage Grid) -->
+            <div class="px-5 mt-8">
+                <div class="flex items-center justify-between mb-5 border-b border-white/10 pb-3">
+                    <div class="flex items-center space-x-2.5">
+                        <span class="w-1.5 h-6 bg-[#00ff88] rounded-full shadow-[0_0_10px_#00ff88]"></span>
+                        <h2 class="text-lg font-gaming font-extrabold text-white tracking-wider uppercase">Best Offers for You</h2>
+                    </div>
+                    <span class="text-[10px] font-gaming font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-1 rounded-md">6 PACKS</span>
                 </div>
 
-                <!-- Plan 2 -->
-                <div class="premium-3d-card border-l-6 border-orange-500 bg-orange-500/5">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-extrabold text-lg text-white flex items-center">₹250 Redeem Code <span class="plan-tag-orange">HOT</span></h3>
-                            <p class="text-xs text-slate-400 mt-1">Delivery: 0.001 Sec Instantly</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-2xl font-black text-orange-400">₹129</span>
-                            <button onclick="buyNow(this, 'Redeem Code (₹250)', 129, '₹250 Play Store Credit, Instant Delivery')" class="block mt-2 px-6 py-2 btn-3d text-sm" style="background: #F97316; box-shadow: 0 4px 0px #9A3412;">Buy</button>
-                        </div>
-                    </div>
-                </div>
+                <div class="grid grid-cols-2 gap-3.5">
 
-                <!-- Plan 3 -->
-                <div class="premium-3d-card">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-extrabold text-lg text-white">₹500 Redeem Code</h3>
-                            <p class="text-xs text-slate-400 mt-1">Delivery: 0.001 Sec Instantly</p>
+                    <!-- Plan 1: ₹200 Redeem Code -->
+                    <div class="redeem-collage-card border-t-2 border-emerald-500">
+                        <div class="flex flex-col items-center w-full">
+                            <div class="redeem-img-wrap mt-2">
+                                <img src="redeem.png" alt="₹200 Redeem Code">
+                            </div>
+                            <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">₹200 Redeem Code</h3>
+                            <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                            <span class="text-2xl font-gaming font-black text-[#00ff88] my-2">₹89</span>
                         </div>
-                        <div class="text-right">
-                            <span class="text-2xl font-black text-[#34A853]">₹199</span>
-                            <button onclick="buyNow(this, 'Redeem Code (₹500)', 199, '₹500 Play Store Credit, Instant Delivery')" class="block mt-2 px-6 py-2 btn-3d text-sm">Buy</button>
-                        </div>
+                        <button onclick="buyNow(this, 'Redeem Code (₹200)', 89, '₹200 Play Store Credit, Instant Delivery')" class="w-full py-2.5 btn-3d text-xs">Buy</button>
                     </div>
-                </div>
 
-                <!-- Plan 4 -->
-                <div class="premium-3d-card border-l-6 border-purple-600 bg-purple-500/5">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-extrabold text-lg text-white flex items-center">₹1200 Redeem Code <span class="plan-tag-purple">BEST</span></h3>
-                            <p class="text-xs text-slate-400 mt-1">Delivery: 0.001 Sec Instantly</p>
+                    <!-- Plan 2: ₹250 Redeem Code -->
+                    <div class="redeem-collage-card border-t-2 border-orange-500 bg-orange-950/20">
+                        <div class="flex flex-col items-center w-full">
+                            <span class="plan-tag-orange mb-1.5">HOT</span>
+                            <div class="redeem-img-wrap">
+                                <img src="redeem.png" alt="₹250 Redeem Code">
+                            </div>
+                            <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">₹250 Redeem Code</h3>
+                            <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                            <span class="text-2xl font-gaming font-black text-orange-400 my-2">₹129</span>
                         </div>
-                        <div class="text-right">
-                            <span class="text-2xl font-black text-purple-400">₹429</span>
-                            <button onclick="buyNow(this, 'Redeem Code (₹1200)', 429, '₹1200 Play Store Credit, Instant Delivery')" class="block mt-2 px-6 py-2 btn-3d text-sm" style="background: #9333EA; box-shadow: 0 4px 0px #581C87;">Buy</button>
-                        </div>
+                        <button onclick="buyNow(this, 'Redeem Code (₹250)', 129, '₹250 Play Store Credit, Instant Delivery')" class="w-full py-2.5 btn-3d text-xs" style="background: linear-gradient(135deg, #f97316, #c2410c); box-shadow: 0 0 15px rgba(249, 115, 22, 0.45);">Buy</button>
                     </div>
-                </div>
 
-                <!-- Plan 5 (Trending Premium) -->
-                <div class="trending-premium-card">
-                    <div class="absolute -top-3 right-4 blink-trending bg-gradient-to-r from-pink-600 to-rose-500 text-white text-[11px] font-black px-3 py-1 rounded-full flex items-center space-x-1 uppercase tracking-wider">
-                        <i class="fa-solid fa-fire-flame-curved text-yellow-300"></i>
-                        <span>Trending</span>
-                    </div>
-                    <div class="flex justify-between items-start mt-1">
-                        <div>
-                            <h3 class="font-extrabold text-xl text-white tracking-tight">₹3000 Redeem Code</h3>
-                            <p class="text-xs text-rose-400 font-bold mt-0.5"><i class="fa-solid fa-bolt mr-1"></i> VIP Instant Box Delivery</p>
-                            <p class="text-[11px] text-slate-400 mt-1">Delivery: 0.001 Sec Instantly</p>
+                    <!-- Plan 3: ₹500 Redeem Code -->
+                    <div class="redeem-collage-card border-t-2 border-emerald-500">
+                        <div class="flex flex-col items-center w-full">
+                            <div class="redeem-img-wrap mt-2">
+                                <img src="redeem.png" alt="₹500 Redeem Code">
+                            </div>
+                            <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">₹500 Redeem Code</h3>
+                            <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                            <span class="text-2xl font-gaming font-black text-[#00ff88] my-2">₹199</span>
                         </div>
-                        <div class="text-right">
-                            <span class="text-3xl font-black text-pink-400 drop-shadow-sm">₹799</span>
-                            <button onclick="buyNow(this, 'Redeem Code (₹3000)', 799, '₹3000 Play Store Credit, Instant Delivery')" class="block mt-3 px-7 py-2.5 btn-3d text-sm tracking-wide" style="background: linear-gradient(180deg, #EC4899 0%, #DB2777 100%); box-shadow: 0 4px 0px #9D174D;">Buy</button>
-                        </div>
+                        <button onclick="buyNow(this, 'Redeem Code (₹500)', 199, '₹500 Play Store Credit, Instant Delivery')" class="w-full py-2.5 btn-3d text-xs">Buy</button>
                     </div>
-                </div>
 
+                    <!-- Plan 4: ₹800 Redeem Code (Newly Added for ₹240) -->
+                    <div class="redeem-collage-card border-t-2 border-cyan-400 bg-cyan-950/20">
+                        <div class="flex flex-col items-center w-full">
+                            <span class="plan-tag-cyan mb-1.5">VALUE</span>
+                            <div class="redeem-img-wrap">
+                                <img src="redeem.png" alt="₹800 Redeem Code">
+                            </div>
+                            <h3 class="font-gaming font-extrabold text-sm text-cyan-300 tracking-wide">₹800 Redeem Code</h3>
+                            <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                            <span class="text-2xl font-gaming font-black text-cyan-400 my-2">₹240</span>
+                        </div>
+                        <button onclick="buyNow(this, 'Redeem Code (₹800)', 240, '₹800 Play Store Credit, Instant Delivery')" class="w-full py-2.5 btn-3d text-xs !text-slate-950" style="background: linear-gradient(135deg, #00f3ff, #0284c7); box-shadow: 0 0 15px rgba(0, 243, 255, 0.45);">Buy</button>
+                    </div>
+
+                    <!-- Plan 5: ₹1200 Redeem Code -->
+                    <div class="redeem-collage-card border-t-2 border-purple-500 bg-purple-950/20">
+                        <div class="flex flex-col items-center w-full">
+                            <span class="plan-tag-purple mb-1.5">BEST</span>
+                            <div class="redeem-img-wrap">
+                                <img src="redeem.png" alt="₹1200 Redeem Code">
+                            </div>
+                            <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">₹1200 Redeem Code</h3>
+                            <p class="text-[11px] text-slate-400 font-semibold mt-0.5">0.001 Sec Instantly</p>
+                            <span class="text-2xl font-gaming font-black text-purple-400 my-2">₹429</span>
+                        </div>
+                        <button onclick="buyNow(this, 'Redeem Code (₹1200)', 429, '₹1200 Play Store Credit, Instant Delivery')" class="w-full py-2.5 btn-3d text-xs" style="background: linear-gradient(135deg, #9333ea, #6b21a8); box-shadow: 0 0 15px rgba(147, 51, 234, 0.45);">Buy</button>
+                    </div>
+
+                    <!-- Plan 6: ₹3000 Redeem Code (Trending VIP) -->
+                    <div class="redeem-collage-card border-t-2 border-pink-500 bg-pink-950/25">
+                        <div class="blink-trending bg-gradient-to-r from-pink-600 to-rose-500 text-white font-gaming text-[8px] font-black px-2 py-0.5 rounded-md flex items-center space-x-1 uppercase tracking-wider">
+                            <i class="fa-solid fa-fire-flame-curved text-yellow-300"></i>
+                            <span>Trending</span>
+                        </div>
+                        <div class="flex flex-col items-center w-full mt-1">
+                            <div class="redeem-img-wrap">
+                                <img src="redeem.png" alt="₹3000 Redeem Code">
+                            </div>
+                            <h3 class="font-gaming font-extrabold text-sm text-white tracking-wide">₹3000 Redeem Code</h3>
+                            <p class="text-[10px] text-rose-400 font-bold mt-0.5"><i class="fa-solid fa-bolt mr-0.5"></i> VIP Instant Delivery</p>
+                            <span class="text-2xl font-gaming font-black text-pink-400 my-2 drop-shadow-sm">₹799</span>
+                        </div>
+                        <button onclick="buyNow(this, 'Redeem Code (₹3000)', 799, '₹3000 Play Store Credit, Instant Delivery')" class="w-full py-2.5 btn-3d text-xs" style="background: linear-gradient(135deg, #ec4899, #be185d); box-shadow: 0 0 16px rgba(236, 72, 153, 0.5);">Buy</button>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        /* ==========================================
+           LIVE INTERACTIVE GAMING PARTICLE ENGINE
+           ========================================== */
+        const canvas = document.getElementById('liveBgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 130 };
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        window.addEventListener('touchmove', function(event) {
+            if (event.touches.length > 0) {
+                mouse.x = event.touches[0].clientX;
+                mouse.y = event.touches[0].clientY;
+            }
+        });
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.2 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 1.1;
+                this.speedY = (Math.random() - 0.5) * 1.1;
+                this.color = Math.random() > 0.4 ? '#00f3ff' : '#bc13fe';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= (dx / distance) * force * 2;
+                        this.y -= (dy / distance) * force * 2;
+                    }
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = Math.min((canvas.width * canvas.height) / 14000, 75);
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        let opacity = 1 - (distance / 110);
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${opacity * 0.22})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        /* ==========================================
+           ORIGINAL FUNCTIONALITY & LOGIC (UNCHANGED)
+           ========================================== */
         let isConfirmed = false;
         let calculatedRedeemValue = 0;
 
@@ -250,7 +486,7 @@
                 setTimeout(() => {
                     loader.style.display = 'none';
                     btnText.innerText = "Verified: " + email.split('@')[0];
-                    document.getElementById('verifyBtn').style.background = "#059669"; 
+                    document.getElementById('verifyBtn').style.background = "linear-gradient(135deg, #10b981, #047857)"; 
                     isConfirmed = true;
                     localStorage.setItem('userEmail', email);
                     document.getElementById('mainSection').classList.remove('hidden');
@@ -279,7 +515,7 @@
             
             if (isNaN(amount) || inputField.value === '') {
                 display.innerText = "Enter Minimum Amount ₹80";
-                display.className = "text-sm font-bold text-red-500";
+                display.className = "text-xs sm:text-sm font-bold text-red-500";
                 calculatedRedeemValue = 0;
                 return;
             }
@@ -293,12 +529,12 @@
             if (amount < 80) {
                 inputField.style.borderColor = '#ef4444'; 
                 display.innerText = "Enter Minimum Amount ₹80";
-                display.className = "text-sm font-bold text-red-500";
+                display.className = "text-xs sm:text-sm font-bold text-red-500";
                 calculatedRedeemValue = 0;
                 return;
             } else {
                 inputField.style.borderColor = ''; 
-                display.className = "text-lg font-black text-blue-400"; 
+                display.className = "text-base font-gaming font-black text-blue-400"; 
             }
 
             let ratio = 2.8; 
@@ -355,4 +591,4 @@
         });
     </script>
 </body>
-  </html>
+</html>
